@@ -714,17 +714,17 @@
                     { name: 'Berlin, Germany', lat: 52.52, lon: 13.40, tz: 'Europe/Berlin' },
                     { name: 'Toronto, Canada', lat: 43.65, lon: -79.38, tz: 'America/Toronto' },
                     { name: 'Mexico City, Mexico', lat: 19.43, lon: -99.13, tz: 'America/Mexico_City' },
-                    { name: 'Buenos Aires, Argentina', lat: -34.61, lon: -58.38, tz: 'America/Argentina/Buenos_Aires' }
+                    { name: 'Buenos Aires, Argentina', lat: -34.61, lon: -58.38, tz: 'America/Argentina/Buenos_Aires' },
                     { name: 'Istanbul, Turkey', lat: 41.01, lon: 28.95, tz: 'Europe/Istanbul' },
                     { name: 'Seoul, South Korea', lat: 37.57, lon: 126.98, tz: 'Asia/Seoul' },
                     { name: 'Bangkok, Thailand', lat: 13.75, lon: 100.50, tz: 'Asia/Bangkok' },
                     { name: 'Lagos, Nigeria', lat: 6.52, lon: 3.38, tz: 'Africa/Lagos' },
-                    { name: 'Jakarta, Indonesia', lat: -6.21, lon: 106.85, tz: 'Asia/Jakarta' }
+                    { name: 'Jakarta, Indonesia', lat: -6.21, lon: 106.85, tz: 'Asia/Jakarta' },
                     { name:  'Singapore, Singapore', lat: 1.35, lon: 103.82, tz: 'Asia/Singapore' },
                     { name: 'Dubai, UAE', lat: 25.20, lon: 55.27, tz: 'Asia/Dubai' },
                     { name: 'Madrid, Spain', lat: 40.42, lon: -3.70, tz: 'Europe/Madrid' },
                     { name: 'Rome, Italy', lat: 41.90, lon: 12.49, tz: 'Europe/Rome' },
-                    { name: 'Kuala Lumpur, Malaysia', lat: 3.14, lon: 101.69, tz: 'Asia/Kuala_Lumpur' }
+                    { name: 'Kuala Lumpur, Malaysia', lat: 3.14, lon: 101.69, tz: 'Asia/Kuala_Lumpur' },
                     { name: 'Johannesburg, South Africa', lat: -26.20, lon: 28.04, tz: 'Africa/Johannesburg' },
                     { name: 'Santiago, Chile', lat: -33.45, lon: -70.66, tz: 'America/Santiago' },
                     { name: 'Athens, Greece', lat: 37.98, lon: 23.73, tz: 'Europe/Athens' },
@@ -763,3 +763,115 @@
 
             function formatTime(h, m, s) {
                 const period = h >= 12 ? 'PM' : 'AM';
+                let h12 = h % 12;
+                if (h12 === 0) h12 = 12;
+                const pad = (n) => n.toString().padStart(2, '0');
+                return '${pad(h12)}:${pad(m)}:${pad(s)} ${period}';
+            }
+
+            function updateClock() {
+                const simDate = new Date(simMs);
+
+
+                const utcHour = simDate.getUTCHours();
+                const utcMinute = simDate.getUTCMinutes();
+                const utcSecond = simDate.getUTCSeconds();
+                const utcdecimal = utcHour + utcMinute / 60 + utcSecond / 3600;
+
+                let localHourDecimal = (utcDecimal + selectedCity.offset + 24);
+                const localHourWhole = Math.floor(localHourDecimal)
+                const localMinuteWhole = Math.floor((localHourDecimal - localHourWhole) * 60);
+                const localSecondWhole = Math.floor(((localHourDecimal - localHourWhole) * 60 - localMinuteWhole) * 60);
+
+
+
+
+                let noonLon = (12 - utcDecimal) * 15;
+                noonLon = ((noonLon + 180) % 360 + 360) % 360 - 180;    
+                spinGroup.rotation.y = -planarAngleForLongitude(noonLon);
+
+                timeText.textContent = formatTime(localHourWhole, localMinuteWhole, localMinuteWhole, localSecondWhole);
+                dateText.textContent = simDate.toLocaleDateString(undefined, {
+                    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC'
+                });
+                const sign = selectedCity.offset >= 0 ? '+' : '-';
+                txText.textContent = '${selectedCity.name} . (UTC${sign}${selectedCity.offset})';
+
+                const isDay = localHourWhole >= 6 && localHourWhole < 18;
+                if (isDay) {
+                    badge.textContent = '☀ DAYTIME';
+      badge.className = 'badge day';
+    } else {
+      badge.textContent = '☾ NIGHTTIME';
+      badge.className = 'badge night';
+    }
+  }
+
+
+  document.querySelectorAll('.speed-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.speed-btn').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        speedMultiplier = parseFloat(btn.dataset.mult);
+    });
+});
+
+
+
+
+
+const clock = new THREE.Clock();
+
+
+
+
+
+const MOON_ORBIT_HOURS = 27.32 * 24;
+
+function animate() {
+    requestAnimationFrame(animate);
+    const deltaRealMs = clock.getDelta() * 1000;
+
+
+    simMs += deltaRealMs * speedMultiplier;
+    updateClock();
+
+
+
+    const simHoursElapsed = (simMs - clockStartMs) / 3600000;
+    const moonAngle = (simHoursElapsed / MOON_ORBIT_HOURS) * Math.PI * 2;
+    moonOrbitGroup.rotation.y = moonAngle;
+    moonMesh.rotation.y += (deltaRealMs / 1000) * 0.003;
+
+
+    star.rotation.y += (deltaRealMs / 1000) * 0.003;
+    
+    controls.update();
+    renderer.render(scene, camera);
+}
+
+animate();
+
+
+
+
+
+window.addEventListener('load', () => {
+    const loading = document.getElementById('LOADING');
+    loading.style.opacity = '0';
+    setTimeout(() => { loading.style.display = 'none'; }, 500);
+});
+
+setTimeout(() => {
+    const loading = document.getElementById('loading');
+    if (loading) {
+        loading.style.opacity = '0';
+        setTimeout(() => { loading.style.display = 'none'; }, 500);
+    }
+}, 900);
+
+                    })();
+                </script>
+
+                </body>
+                </html>
