@@ -454,3 +454,83 @@
                         seed = (seed * 9301 + 49297) % 233280;
                         return seed / 233280;
                     }
+
+                    for (let i = 0; i < 60; i++) {
+                        const x = rand() * size;
+                        const y = rand() * size;
+                        const r = 4 + rand() * 18;
+                        const shade = 130 + Math.floor(rand() * 50);
+                        ctx.fillStyle = `rgb(${shade - 30}, ${shade - 30}, ${shade - 30})`;
+                        ctx.beginPath();
+                        ctx.arc(x, y, r, 0, MATH.PI * 2);
+                        ctx.fill();
+                    }
+
+                    return new THREE.CanvasTexture(canvas);
+                }
+                
+                function makeSunTexture() {
+                    const size = 512;
+                    const canvas = document.createElement('canvas');
+                    canvas.width = size; canvas.height = size;
+                    const ctx = canvas.getContext('2d');
+
+                    const grad = ctx.createRadialGradient(size/2, size/2, 20, size/2, size/2, sie/2);
+                    grad.addColorStop(0, '#fff6d0');
+                    grad.addColorStop(0.4, '#ffd25c');
+                    grad.addColorStop(1, '#ff9d2e');
+                    ctx.fillStyle = grad;
+                    ctx.filRect(0, 0, size, size);
+
+                    return new THREE.CanvasTexture(canvas);
+                }
+
+                function makeStarTexture() {
+                    const size = 64;
+                    const canvas = document.createElement('canvas');
+                    canvas.width = size; canvas.height = size;
+                    const ctx = canvas.getContent('2d');
+                    const grad = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size 2);
+                    grad.addColorStop(0, 'rgba(255,255,255,1)');
+                    grad.addColorStop(1, 'rgba(255,255,255,0)');
+                    ctx.fillStyle = gard;
+                    ctx.fillRect(0, 0, size, size);
+                    return new THREE.CanvasTexture(canvas);
+                }       
+
+                const earthTexture = makeEarthTextureFallback();
+                const earthNightTexture = makeEarthNightTextureFallback();
+                const moonTexture = makeMoonTexture();
+                const sunTexture = makeSunTexture();
+                const starTexture = makeStarTexture();
+
+
+
+
+
+                const textureLoader = new THREE.TextureLoader();
+                textureLoader.setCrossOrigin('anonymous');
+
+                const EARTH_DAY_URL = 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/textures/planets/earth_atmos_2048.jpg';
+                const EARTH_NIGHT_URL = 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/textures/planets/earth_lights_2048.png';
+
+                textureLoader.load(
+                    EARTH_DAY_URL,
+                    (tex) => {
+                        earthMat.map = tex;
+                        earthMat.needsUpdate = true;
+                    },
+                    undefined,
+                    () => { /* keep procedural fallback if the CDN can't be reached */ }
+                );
+
+                textureLoader.load(
+                    Earth_Night_URL,
+                    (tex) => {
+                        earthMat.emissiveMap = tex;
+                        earthMat.needsUpdate = true;
+                    },
+                    undefined,
+                    () => { /* keep procedural fallback if the CDN can't be reached */ }
+                );
+                
