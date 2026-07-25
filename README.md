@@ -37,9 +37,7 @@ preview.png
 
 ##  Live Demo
 
-After enabling GitHub Pages:
-
-https://YOUR_USERNAME.github.io/earth-clock/
+https://earthclock2.netlify.app/
 
 ---
 
@@ -80,13 +78,13 @@ earth-clock/
 ### Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/earth-clock.git
+git clone https://github.com/jainilpawar2-design/Earth-Clock.git
 ```
 
 Open the project folder
 
 ```bash
-cd earth-clock
+cd Earth-Clock
 ```
 
 Simply open
