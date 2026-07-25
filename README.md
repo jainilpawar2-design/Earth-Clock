@@ -1,4 +1,4 @@
-# 🌍 Real-Time Earth Clock
+#  Real-Time Earth Clock
 
 A beautiful interactive 3D Earth simulation built with **Three.js** that displays the real-time day/night cycle, world clock, and location marker on Earth.
 
@@ -8,23 +8,22 @@ A beautiful interactive 3D Earth simulation built with **Three.js** that display
 ![GitHub](https://img.shields.io/badge/License-MIT-green)
 
 ---
+##  Features
 
-## ✨ Features
-
-- 🌎 Interactive 3D Earth
-- 🛰️ Real satellite-style Earth textures
-- ☀️ Real-time day & night simulation
-- 🌙 Moon orbit animation
-- ⭐ Animated star field
-- 📍 Select locations around the world
-- 🕒 Live world clock
-- ⚡ Adjustable simulation speed
-- 🖱️ Mouse drag to rotate Earth
-- 🔍 Scroll to zoom
+-  Interactive 3D Earth
+-  Real satellite-style Earth textures
+-  Real-time day & night simulation
+-  Moon orbit animation
+-  Animated star field
+-  Select locations around the world
+-  Live world clock
+-  Adjustable simulation speed
+-  Mouse drag to rotate Earth
+-  Scroll to zoom
 
 ---
 
-## 📸 Preview
+##  Preview
 
 > Add a screenshot here after uploading.
 
@@ -36,7 +35,7 @@ preview.png
 
 ---
 
-## 🚀 Live Demo
+##  Live Demo
 
 After enabling GitHub Pages:
 
@@ -44,7 +43,7 @@ https://YOUR_USERNAME.github.io/earth-clock/
 
 ---
 
-## 🛠️ Built With
+##  Built With
 
 - HTML5
 - CSS3
@@ -53,7 +52,7 @@ https://YOUR_USERNAME.github.io/earth-clock/
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 earth-clock/
@@ -65,7 +64,7 @@ earth-clock/
 
 ---
 
-## 🎮 Controls
+##  Controls
 
 | Action | Control |
 |---------|----------|
@@ -76,7 +75,7 @@ earth-clock/
 
 ---
 
-## ⚙️ Installation
+##  Installation
 
 ### Clone the repository
 
@@ -102,7 +101,7 @@ No installation required.
 
 ---
 
-## 🌐 Deploy on GitHub Pages
+##  Deploy on GitHub Pages
 
 1. Upload the project to GitHub.
 2. Make sure the homepage is named:
@@ -141,7 +140,7 @@ https://YOUR_USERNAME.github.io/earth-clock/
 
 ---
 
-## 📦 External Resources
+##  External Resources
 
 This project uses:
 
@@ -153,7 +152,7 @@ loaded directly from public CDNs.
 
 ---
 
-## 📱 Browser Support
+##  Browser Support
 
 - Chrome ✅
 - Edge ✅
@@ -163,7 +162,7 @@ loaded directly from public CDNs.
 
 ---
 
-## 🤝 Contributing
+##  Contributing
 
 Contributions are welcome.
 
@@ -174,13 +173,13 @@ Contributions are welcome.
 
 ---
 
-## 📄 License
+##  License
 
 This project is licensed under the MIT License.
 
 ---
 
-## 👨‍💻 Author
+##  Author
 
 **Jainil Pawar**
 
@@ -188,4 +187,4 @@ GitHub: https://github.com/jainilpawar2-design
 
 ---
 
-⭐ If you like this project, consider giving it a star!
+ If you like this project, consider giving it a star!
