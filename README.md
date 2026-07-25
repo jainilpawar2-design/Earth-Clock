@@ -31,6 +31,8 @@ Example:
 
 ```
 preview.png
+preview1.png
+preview2.png
 ```
 
 ---
