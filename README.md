@@ -25,15 +25,12 @@ A beautiful interactive 3D Earth simulation built with **Three.js** that display
 
 ##  Preview
 
-> Add a screenshot here after uploading.
 
-Example:
+<p align="center">
+  <img src="./brave_screenshot_earthclock2.netlify.app.png" alt="Earth Clock Preview 1" width="45%">
+  <img src="./brave_screenshot_earthclock2.netlify.app%20(1).png" alt="Earth Clock Preview 2" width="45%">
+</p>
 
-```
-preview.png
-preview1.png
-preview2.png
-```
 
 ---
 
